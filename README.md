@@ -1,126 +1,45 @@
-<<<<<<< HEAD
-# JTADC-Net
-=======
 # GAN + ViT Joint Training for Medical Image Classification
 
-This repository contains the official implementation for our paper:
+This repository contains the official implementation of a joint training framework combining a **Medical ResSE-UNet GAN** (for image denoising) with a fine-tuned **Vision Transformer (ViT) classifier**, applied to gallbladder ultrasound image classification.
 
-> **[Your Paper Title Here]**  
-> [Your Name(s)], [Conference/Journal Name], [Year]
+## Dataset Preparation
 
----
+Download the gallbladder ultrasound dataset from Kaggle: [gallbladder-split](https://www.kaggle.com/datasets/). Update the `SPLIT_ROOT` path in `config.py` to point to your local copy.
 
-## Overview
+## Usage
 
-A joint training framework combining a **Medical ResSE-UNet GAN** (image denoising/enhancement) with a fine-tuned **Vision Transformer (ViT) classifier**, trained end-to-end on a gallbladder ultrasound dataset.
+### Step 1: Configure Paths and Hyperparameters
 
-### Architecture
+Edit `config.py` to set your dataset path and adjust training parameters if needed.
 
-| Component | Details |
-|-----------|---------|
-| **Generator** | Medical ResSE-UNet with Residual Squeeze-and-Excitation blocks + Attention Gates |
-| **Discriminator** | Self-Attention Discriminator (LSGAN loss) |
-| **Classifier** | Fine-tuned `google/vit-base-patch16-224-in21k` |
-| **Loss** | LSGAN + L1 Reconstruction (λ=100) + Classification (λ=1) |
-| **Training** | Classifier frozen epochs 1–15, unfrozen with LR=1e-4 afterwards |
+### Step 2: Run Sanity Checks
 
----
-
-## Repository Structure
-
-```
-├── config.py          # Hyperparameters and dataset paths
-├── dataset.py         # Data loading, preprocessing, augmentation, generators
-├── models.py          # Generator, Discriminator, ViT Classifier definitions
-├── train.py           # Joint GAN + Classifier training loop
-├── tests.py           # Pre-training sanity checks
-├── utils.py           # Helper utilities (ViT selective unfreezing)
-├── requirements.txt   # Python dependencies
-└── notebook/
-    └── gan-classifier-combined-training.ipynb  # Original Kaggle notebook
-```
-
----
-
-## Installation
+Before training, verify your setup:
 
 ```bash
-git clone https://github.com/<your-username>/<repo-name>.git
-cd <repo-name>
-pip install -r requirements.txt
-```
-
----
-
-## Dataset Setup
-
-Update `SPLIT_ROOT` in `config.py`:
-
-```python
-SPLIT_ROOT = "/path/to/your/gallbladder_split"
-```
-
-Expected directory layout:
-
-```
-gallbladder_split/
-├── train/
-│   ├── class_name_1/
-│   └── class_name_2/
-├── val/
-└── test/
-```
-
----
-
-## Running
-
-```bash
-# Step 1: Verify setup (sanity checks)
 python tests.py
+```
 
-# Step 2: Train
+### Step 3: Train the Model
+
+```bash
 python train.py
 ```
 
-Saved checkpoints:
+The best checkpoints are saved as:
 - `generator_best.keras`
 - `classifier_vit_best_joint.keras`
 
----
+## File Overview
 
-## Key Hyperparameters
+- **`config.py`** — Hyperparameters and dataset paths
+- **`models.py`** — Generator (ResSE-UNet), Discriminator, ViT Classifier
+- **`dataset.py`** — Data loading, noise augmentation, batch generators
+- **`train.py`** — Joint GAN + Classifier training loop
+- **`tests.py`** — Pre-training sanity checks
+- **`utils.py`** — ViT selective unfreezing utility
+- **`notebook/`** — Original Kaggle notebook
 
-| Parameter | Value |
-|-----------|-------|
-| Image size | 224 × 224 |
-| Batch size | 8 |
-| GAN epochs | 70 |
-| Classifier unfreeze epoch | 15 |
-| LR – Generator | 2e-4 |
-| LR – Discriminator | 1e-4 |
-| LR – Classifier (fine-tune) | 1e-4 |
-| λ_rec (reconstruction) | 100 |
-| λ_cls (classification) | 1 |
+## Support
 
----
-
-## Citation
-
-If you use this code, please cite our paper:
-
-```bibtex
-@article{yourname2025,
-  title   = {Your Paper Title Here},
-  author  = {Last, First and Co-Author, Name},
-  journal = {Journal or Conference Name},
-  year    = {2025}
-}
-```
-
----
-
-## License
-
-[MIT](LICENSE)
->>>>>>> master
+If you encounter any issues, feel free to contact me at **your@email.com**.
