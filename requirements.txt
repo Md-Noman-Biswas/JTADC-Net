@@ -1,0 +1,12 @@
+tensorflow>=2.12
+tensorflow-addons
+transformers>=4.30
+numpy
+pandas
+matplotlib
+seaborn
+tqdm
+scikit-learn
+scikit-image
+scipy
+Pillow
