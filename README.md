@@ -38,4 +38,3 @@ The best checkpoints are saved as:
 - **`train.py`** — Joint GAN + Classifier training loop
 - **`tests.py`** — Pre-training sanity checks
 - **`utils.py`** — ViT selective unfreezing utility
-- **`notebook/`** — Original Kaggle notebook
