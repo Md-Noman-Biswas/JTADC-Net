@@ -1,10 +1,10 @@
-# GAN + ViT Joint Training for Medical Image Classification
+# JTADC-Net: An Adversarial Joint Task-Aware Denoising and Classification Network for Noise Robust Gallbladder Disease Diagnosis
 
 This repository contains the official implementation of a joint training framework combining a **Medical ResSE-UNet GAN** (for image denoising) with a fine-tuned **Vision Transformer (ViT) classifier**, applied to gallbladder ultrasound image classification.
 
 ## Dataset Preparation
 
-Download the gallbladder ultrasound dataset from Kaggle: [gallbladder-split](https://www.kaggle.com/datasets/). Update the `SPLIT_ROOT` path in `config.py` to point to your local copy.
+Download the gallbladder ultrasound dataset from Kaggle: [gallbladder-split](https://data.mendeley.com/datasets/r6h24d2d3y/2). Update the `SPLIT_ROOT` path in `config.py` to point to your local copy.
 
 ## Usage
 
@@ -39,7 +39,3 @@ The best checkpoints are saved as:
 - **`tests.py`** — Pre-training sanity checks
 - **`utils.py`** — ViT selective unfreezing utility
 - **`notebook/`** — Original Kaggle notebook
-
-## Support
-
-If you encounter any issues, feel free to contact me at **your@email.com**.
